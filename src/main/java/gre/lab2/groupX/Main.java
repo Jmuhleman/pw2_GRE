@@ -24,15 +24,15 @@ public final class Main {
         BFYResult result = bfy.compute(graph, 0);
 
          System.out.println("--");
-        /*
-        // Print the result
+
         if (result instanceof BFYResult.ShortestPathTree) {
             System.out.println("Shortest path tree:");
             BFYResult.ShortestPathTree spt = (BFYResult.ShortestPathTree) result;
             for (int i = 0; i < spt.distances().length; i++) {
             System.out.println("Vertex " + i + ": " + spt.distances()[i] + " (predecessor: " + spt.predecessors()[i] + ")");
             }
-        } else if (result instanceof BFYResult.NegativeCycle) {
+        }
+        /*else if (result instanceof BFYResult.NegativeCycle) {
             System.out.println("Negative cycle found:");
             BFYResult.NegativeCycle nc = (BFYResult.NegativeCycle) result;
             //System.out.println("Cycle: " + nc.cycle());

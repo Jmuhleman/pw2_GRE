@@ -21,7 +21,6 @@ public final class BellmanFordYensAlgorithm implements IBellmanFordYensAlgorithm
     distances[from] = 0;
 
     // Relax edges |V| - 1 times
-    for (int i = 0; i < nVertices - 1; i++) {
       for (int u = 0; u < nVertices; u++) {
 
         for (WeightedDigraph.Edge edge : graph.getOutgoingEdges(u)) {
@@ -32,7 +31,6 @@ public final class BellmanFordYensAlgorithm implements IBellmanFordYensAlgorithm
           }
         }
       }
-    }
 
     return new BFYResult.ShortestPathTree(distances, predecessors);
   }
