@@ -11,8 +11,7 @@ public final class Main {
 
 
     //read the files
-    final String[] FILES = new String[] { "data/test.txt", "data/reseau1.txt", "data/reseau2.txt",
-                                          "data/reseau3.txt", "data/reseau4.txt"};
+    final String[] FILES = new String[] { "data/test.txt", "data/test_5_4.txt"};
 
     for (var file : FILES){
         System.out.println("\n\n>> Calculating the shortest path of the graph in " + file + ":");
