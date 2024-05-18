@@ -4,6 +4,9 @@ import gre.lab2.graph.BFYResult;
 import gre.lab2.graph.IBellmanFordYensAlgorithm;
 import gre.lab2.graph.WeightedDigraph;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 public final class BellmanFordYensAlgorithm implements IBellmanFordYensAlgorithm {
     @Override
@@ -13,7 +16,7 @@ public final class BellmanFordYensAlgorithm implements IBellmanFordYensAlgorithm
         int nVertices = graph.getNVertices();
         int[] distances = new int[nVertices];
         int[] predecessors = new int[nVertices];
-        boolean[] inQueue = new boolean[nVertices*nVertices];
+        boolean[] inQueue = new boolean[nVertices];
         int sentinel = -2;
 
         // (1) Initialize distances and predecessors
@@ -25,6 +28,7 @@ public final class BellmanFordYensAlgorithm implements IBellmanFordYensAlgorithm
 
         // (3) Create a queue with the source and the sentinel
         int[] queue = new int[nVertices * nVertices + 1]; // Extra space for the sentinel
+        Arrays.fill(queue, -3);
         int front = 0;
         int rear = 0;
         queue[rear] = from;
@@ -34,28 +38,26 @@ public final class BellmanFordYensAlgorithm implements IBellmanFordYensAlgorithm
         int k = 0;
 
         // (4) While the queue is not empty
-        while (front != rear) {
+        while (queue[front] != -3) {
             // (5) Dequeue the first vertex
-
-            inQueue[front] = false;
             int currentVertex = queue[front++];
             // (6) If i is the sentinel
             if (currentVertex == sentinel) {
                 // (7) If the queue is not empty
-                if (front+1 != rear) {
+                if (queue[front] != -3) {
                     ++k;
                     if (k == nVertices) {
                         // retourner circuit absorbant
                         // puisqu'on a fait n itérations avec améliorations
-
-
+                        return new BFYResult.ShortestPathTree(distances, predecessors);
                     } else {
                         // (8) Enqueue the sentinel
                         queue[++rear] = sentinel;
                     }
                 }
-
             } else {
+                //if it was not a sentinelle pop, update the bool queue regarding last vertex!
+                inQueue[queue[front-1]] = false;
                 // (11) Process each successor of i
                 for (WeightedDigraph.Edge edge : graph.getOutgoingEdges(currentVertex)) {
                     int j = edge.to();
