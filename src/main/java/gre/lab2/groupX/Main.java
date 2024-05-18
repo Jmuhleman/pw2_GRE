@@ -11,7 +11,7 @@ public final class Main {
 
 
     //read the files
-    final String[] FILES = new String[] { "data/test.txt", "data/test_5_4.txt"};
+    final String[] FILES = new String[] {"data/test_5_4.txt", "data/test.txt", "data/reseau1.txt", "data/reseau2.txt", "data/reseau3.txt", "data/reseau4.txt"};
 
     for (var file : FILES){
         System.out.println("\n\n>> Calculating the shortest path of the graph in " + file + ":");
@@ -22,7 +22,6 @@ public final class Main {
         // Apply the BellmanFordYensAlgorithm algorithm from the vertex 0
         BFYResult result = bfy.compute(graph, 0);
 
-         System.out.println("--");
 
         if (result instanceof BFYResult.ShortestPathTree) {
             System.out.println("Shortest path tree:");
@@ -31,12 +30,12 @@ public final class Main {
             System.out.println("Vertex " + i + ": " + spt.distances()[i] + " (predecessor: " + spt.predecessors()[i] + ")");
             }
         }
-        /*else if (result instanceof BFYResult.NegativeCycle) {
+        else if (result instanceof BFYResult.NegativeCycle) {
             System.out.println("Negative cycle found:");
             BFYResult.NegativeCycle nc = (BFYResult.NegativeCycle) result;
-            //System.out.println("Cycle: " + nc.cycle());
+            System.out.println("Cycle: " + nc.vertices());
         }
-*/
+
 
 
 

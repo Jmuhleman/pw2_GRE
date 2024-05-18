@@ -4,6 +4,7 @@ import gre.lab2.graph.BFYResult;
 import gre.lab2.graph.IBellmanFordYensAlgorithm;
 import gre.lab2.graph.WeightedDigraph;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public final class BellmanFordYensAlgorithm implements IBellmanFordYensAlgorithm
                     if (k == nVertices) {
                         // retourner circuit absorbant
                         // puisqu'on a fait n itérations avec améliorations
-                        return new BFYResult.ShortestPathTree(distances, predecessors);
+                        return detectNegativeCycle(graph, predecessors, distances);
                     } else {
                         // (8) Enqueue the sentinel
                         queue[++rear] = sentinel;
@@ -116,11 +117,11 @@ public final class BellmanFordYensAlgorithm implements IBellmanFordYensAlgorithm
             } while (current != cycleNode);
             cycle[cycleLength++] = current;
 
-          //  List<Integer> cycleList = new ArrayList<>();
+            List<Integer> cycleList = new ArrayList<>();
             for (int i = cycleLength - 1; i >= 0; i--) {
-           //     cycleList.add(cycle[i]);
+                cycleList.add(cycle[i]);
             }
-           // return new BFYResult.NegativeCycle(cycleList, cycleLength);
+            return new BFYResult.NegativeCycle(cycleList, cycleLength);
         }
 
         return null;
